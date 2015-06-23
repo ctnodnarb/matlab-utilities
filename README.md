@@ -112,7 +112,7 @@ Returns a cell array containing the paths to every file in the specified directo
 
 * `directory` The path to the directory to search through.
 * `pattern` A file glob pattern specifying which files to find.  For example, `*.txt` to find all text files.
-* `returns` A 1xN cell array of strings specifying the paths to each file, where N is the number of files found.
+* `returns` An Nx1 cell array of strings specifying the paths to each file, where N is the number of files found.
 
 Example:
 
