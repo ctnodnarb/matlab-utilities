@@ -1,4 +1,4 @@
-function entries = walkDirectory(directory, pattern)
+function entries = walkDirectory(directory, pattern, type)
 % entries = walkDirectory(directory, pattern)
 %
 % Walks through the folder structure of a directory and returns the
@@ -8,14 +8,31 @@ function entries = walkDirectory(directory, pattern)
 % For example, to return the paths to all the txt files in the current
 % directory and its subdirectories:
 %	walk('.', '*.txt')
+%
+% Parameters:
+%	directory - The path to the directory to walk through.
+%	pattern - The pattern to match.
+%	type - Optional.  Can be either 'glob' or 'regex'.  Specifies the type 
+%		of pattern to match.  Note that this only matches against the name
+%		of the file within the subdirectory, not the full path of the
+%		subdirectory going to the file.
+
+if nargin < 3 || strcmpi(type, 'glob')
+	useRegex = false;
+elseif strcmpi(type, 'regex')
+	useRegex = true;
+else
+	error('Unrecognized pattern type.  Should be either "glob" or "regex".');
+end
+	
 
 % Get a list containing the folder and all its subfolders.
 if regexp(computer, '^GLNX.*')
 	% Linux separates paths with colons
-	directories_to_search = strsplit(genpath(directory), ':');
+	directoriesToSearch = strsplit(genpath(directory), ':');
 else
 	% Windows separates paths with semicolons
-	directories_to_search = strsplit(genpath(directory), ';');
+	directoriesToSearch = strsplit(genpath(directory), ';');
 end
 
 % directories_to_search should now be a cell array containing a list of
@@ -24,12 +41,23 @@ end
 % (excluding the final exmpty string at the end) and gather all the file
 % names that match the pattern.
 entries = [];
-for i = 1:length(directories_to_search)-1
-	folder = directories_to_search{i};
-	dir_entries = dir(fullfile(folder, pattern));
-	if ~isempty(dir_entries)
-		entries = [entries; arrayfun(@fullfile, ...
-				repmat({folder}, length(dir_entries), 1), ...
-				{dir_entries.name}')];
+for i = 1:length(directoriesToSearch)-1
+	folder = directoriesToSearch{i};
+	if useRegex
+		dirEntries = dir(folder);
+		fileNames = {dirEntries.name};
+		matches = ~cellfun(@isempty, regexp(fileNames, pattern));
+		entries = [entries; ...
+			arrayfun(@fullfile, ...
+			repmat({folder}, sum(matches), 1), ...
+			fileNames(matches)')];
+	else % Use glob
+		dirEntries = dir(fullfile(folder, pattern));
+		if ~isempty(dirEntries)
+			entries = [entries; ...
+				arrayfun(@fullfile, ...
+				repmat({folder}, length(dirEntries), 1), ...
+				{dirEntries.name}')];
+		end
 	end
 end
