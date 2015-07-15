@@ -12,15 +12,19 @@ function entries = walkDirectory(directory, pattern, type)
 % Parameters:
 %	directory - The path to the directory to walk through.
 %	pattern - The pattern to match.
-%	type - Optional.  Can be either 'glob' or 'regex'.  Specifies the type 
-%		of pattern to match.  Note that this only matches against the name
-%		of the file within the subdirectory, not the full path of the
-%		subdirectory going to the file.
+%	type - Optional.  Can be 'glob' (default), 'regexp', or 'regexpi'.  
+%		Specifies the type of pattern to match.  Note that this only 
+%		matches against the name of the file within the subdirectory, not 
+%		the full path of the subdirectory going to the file.
 
 if nargin < 3 || strcmpi(type, 'glob')
 	useRegex = false;
-elseif strcmpi(type, 'regex')
+elseif strcmpi(type, 'regexp')
 	useRegex = true;
+	caseInsensitive = false;
+elseif strcmpi(type, 'regexpi')
+	useRegex = true;
+	caseInsensitive = true;
 else
 	error('Unrecognized pattern type.  Should be either "glob" or "regex".');
 end
@@ -46,7 +50,11 @@ for i = 1:length(directoriesToSearch)-1
 	if useRegex
 		dirEntries = dir(folder);
 		fileNames = {dirEntries.name};
-		matches = ~cellfun(@isempty, regexp(fileNames, pattern));
+		if caseInsensitive
+			matches = ~cellfun(@isempty, regexpi(fileNames, pattern));
+		else
+			matches = ~cellfun(@isempty, regexp(fileNames, pattern));
+		end
 		entries = [entries; ...
 			arrayfun(@fullfile, ...
 			repmat({folder}, sum(matches), 1), ...
