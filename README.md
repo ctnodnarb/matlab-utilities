@@ -106,12 +106,13 @@ printVectorPdf('example.pdf', [4,3], 'in');
 
 ## walkDirectory.m
 
-`entries = walkDirectory(directory, pattern)`
+`entries = walkDirectory(directory, pattern, type)`
 
-Returns a cell array containing the paths to every file in the specified directory and its subdirectories that matches the specified pattern (glob).
+Returns a cell array containing the paths to every file in the specified directory and its subdirectories that matches the specified pattern (glob or regexp).
 
 * `directory` The path to the directory to search through.
-* `pattern` A file glob pattern specifying which files to find.  For example, `*.txt` to find all text files.
+* `pattern` The pattern specifying which files to find.  Can be a glob (for example, `*.txt` to find all text files) or a regexp, as specified by the type parameter.
+* `type` Optional.  The type of pattern to use when doing the match.  Can be `'glob'` (default), `'regexp'`, or `'regexpi'` (case-insensitive regular expression).
 * `returns` An Nx1 cell array of strings specifying the paths to each file, where N is the number of files found.
 
 Example:
