@@ -27,6 +27,8 @@ colormap(cm);
 
 ## clearAll.m
 
+**Note:** This script is no longer needed for newer versions of Matlab.  In older versions of Matlab, calling `clear all` would wipe out any breakpoints that had been set, making debugging difficult.  That no longer happens with newer versions of Matlab.
+
 Running this script is equivalent to running `close all` and `clear all`, except that it preserves any breakpoints that have been set.  This is useful if you want to clear everything out at the beginning of a program, but also want to be able to set breakpoints to debug that program.
 
 Usage:
