@@ -26,7 +26,7 @@ elseif strcmpi(type, 'regexpi')
 	useRegex = true;
 	caseInsensitive = true;
 else
-	error('Unrecognized pattern type.  Should be either "glob" or "regex".');
+	error('Unrecognized pattern type.  Should be "glob", or "regexp", or "regexpi".');
 end
 	
 
