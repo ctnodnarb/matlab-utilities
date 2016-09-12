@@ -1,0 +1,68 @@
+
+# Patterns specific to this repository
+folder*.m
+
+# Compiler outputs
+*.o
+*.a
+*.so
+*.exe
+*.out
+*.obj
+
+# Hidden files, temporary files, etc
+.*
+*~
+*.swp
+*.bak
+*.log
+
+# Unnecessary folders
+[Bb]in
+[Oo]bj
+[Ll]ib
+[Dd]ebug
+[Rr]elease
+[Ii]gnore
+
+# Mac OSX files
+.DS_Store
+
+# Windows files
+Thumbs.db
+thumbs.db
+
+# Matlab files
+*.asv
+*.mexw32
+*.mexw64
+*.mexa32
+*.mexa64
+*.mexmaci32
+*.mexmaci64
+*.mat
+*.fig
+
+# Media files
+*.flac
+*.avi
+*.png
+*.bmp
+*.jpg
+*.jpeg
+*.wav
+
+# Other documents / files
+*.pdf
+*.zip
+*.csv
+
+# LaTeX / BibTeX
+*.aux
+*.blg
+*.bbl
+*.toc
+*.lof
+*.lot
+*.tps
+
