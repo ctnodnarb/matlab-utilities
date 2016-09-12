@@ -106,6 +106,15 @@ printVectorPdf('example.pdf', [4,3], 'in');
 ```
 
 
+## useLatex.m
+
+`useLatex(fontSize, fontName)`
+
+Sets defaults in `groot` (Matlab's root graphical object) so that all text, ticklabel, and legend
+objects will use the LaTeX interpreter.  If a font size and/or font name are specified, defaults are
+set for those as well.
+
+
 ## walkDirectory.m
 
 `entries = walkDirectory(directory, pattern, type)`
