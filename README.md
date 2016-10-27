@@ -27,8 +27,6 @@ colormap(cm);
 
 ## clearAll.m
 
-**Note:** This script is no longer needed for newer versions of Matlab.  In older versions of Matlab, calling `clear all` would wipe out any breakpoints that had been set, making debugging difficult.  That no longer happens with newer versions of Matlab.
-
 Running this script is equivalent to running `close all` and `clear all`, except that it preserves any breakpoints that have been set.  This is useful if you want to clear everything out at the beginning of a program, but also want to be able to set breakpoints to debug that program.
 
 Usage:
@@ -47,11 +45,16 @@ Exports the current (or specified) figure to a pdf file as a rasterized image.  
 * `fileName` The name / path of the file to export the figure to (it should end in .pdf).
 * `figureSize` The size of the figure, formatted as `[width, height]`.
 * `units` The units of the figure size, e.g. `'inches'` or `'in'`.  Any unit that Matlab recognizes will work.
-* `dpi` Optional parameter (defaults to 300).  The resolution of the output in dots per inch.  The default value will also be used if `[]` or `0` are passed in.
-* `extraSpace` Optional parameter (defaults to `[0,0,0,0]`).  The amount of extra space (in normalized units) to include on the left, bottom, right, and top of the image.  This can be used to fix the output if something is getting cut off on one of the edges of the image.  For example, passing `[.1, .1, .1, .1]` would include 10% extra space on all sides of the plot.  If `[]` is passed in, the default value will be used.
-* `figHandle` Optional parameter (defaults to the current figure).  The handle of the figure to export.
+* `dpi` (Optional, default 300)  The resolution of the output in dots per inch.  The default value
+  will also be used if `[]` or `0` are passed in.
+* `extraSpace` (Optional, default `[0,0,0,0]`)  The amount of extra space (in normalized units) to 
+  include on the left, bottom, right, and top of the image.  This can be used to fix the output if 
+  something is getting cut off on one of the edges of the image.  For example, passing 
+  `[.1, .1, .1, .1]` would include 10% extra space on all sides of the plot.  If `[]` is passed in, 
+  the default value will be used.
+* `figHandle` (Optional, defaults to the current figure).  The handle of the figure to export.  
 
-Example:
+Example: 
 
 ```matlab
 % Construct a random plot
@@ -70,9 +73,9 @@ Exports the current (or specified) figure as a png image file.  It attempts to c
 * `fileName` The name / path of the file to export the figure to (it should end in .pdf).
 * `figureSize` The size of the figure, formatted as `[width, height]`.
 * `units` The units of the figure size, e.g. `'inches'` or `'in'`.  Any unit that Matlab recognizes will work.
-* `dpi` Optional parameter (defaults to 300).  The resolution of the output in dots per inch.  The default value will also be used if `[]` or `0` are passed in.
-* `extraSpace` Optional parameter (defaults to `[0,0,0,0]`).  The amount of extra space (in normalized units) to include on the left, bottom, right, and top of the image.  This can be used to fix the output if something is getting cut off on one of the edges of the image.  For example, passing `[.1, .1, .1, .1]` would include 10% extra space on all sides of the plot.  If `[]` is passed in, the default value will be used.
-* `figHandle` Optional parameter (defaults to the current figure).  The handle of the figure to export.
+* `dpi` (Optional, default 300).  The resolution of the output in dots per inch.  The default value will also be used if `[]` or `0` are passed in.
+* `extraSpace` (Optional, default `[0,0,0,0]`).  The amount of extra space (in normalized units) to include on the left, bottom, right, and top of the image.  This can be used to fix the output if something is getting cut off on one of the edges of the image.  For example, passing `[.1, .1, .1, .1]` would include 10% extra space on all sides of the plot.  If `[]` is passed in, the default value will be used.
+* `figHandle` (Optional, defaults to the current figure).  The handle of the figure to export.
 
 Example:
 
@@ -93,8 +96,8 @@ Exports the current (or specified) figure to a pdf file using vector graphics.  
 * `fileName` The name / path of the file to export the figure to (it should end in .pdf).
 * `figureSize` The size of the figure, formatted as `[width, height]`.
 * `units` The units of the figure size, e.g. `'inches'` or `'in'`.  Any unit that Matlab recognizes will work.
-* `extraSpace` Optional parameter (defaults to `[0,0,0,0]`).  The amount of extra space (in normalized units) to include on the left, bottom, right, and top of the image.  This can be used to fix the output if something is getting cut off on one of the edges of the image.  For example, passing `[.1, .1, .1, .1]` would include 10% extra space on all sides of the plot.  If `[]` is passed in, the default value will be used.
-* `figHandle` Optional parameter (defaults to the current figure).  The handle of the figure to export.
+* `extraSpace` (Optional, default `[0,0,0,0]`) The amount of extra space (in normalized units) to include on the left, bottom, right, and top of the image.  This can be used to fix the output if something is getting cut off on one of the edges of the image.  For example, passing `[.1, .1, .1, .1]` would include 10% extra space on all sides of the plot.  If `[]` is passed in, the default value will be used.
+* `figHandle` (Optional, defaults to the current figure) The handle of the figure to export.
 
 Example:
 
@@ -108,11 +111,18 @@ printVectorPdf('example.pdf', [4,3], 'in');
 
 ## useLatex.m
 
-`useLatex(fontSize, fontName)`
+`useLatex(fontSize, fontName, useLatex)`
 
 Sets defaults in `groot` (Matlab's root graphical object) so that all text, ticklabel, and legend
 objects will use the LaTeX interpreter.  If a font size and/or font name are specified, defaults are
 set for those as well.
+
+* `fontSize` (Optional) If specified, sets the default font size for axes, text, and legend objects.
+  To remove a previously set value, set this to `'remove'`.
+* `fontName` (Optional) If specified, sets the default font name for axes, text, and legend objects.
+  To remove a previously set value, set this to `'remove'`.
+* `useLatex` (Optional, default `True`) If true, sets the default interpreter for axes, ticklabel, and
+  legend objects to `'latex'`.  If false, removes those settings.
 
 
 ## walkDirectory.m
@@ -123,7 +133,7 @@ Returns a cell array containing the paths to every file in the specified directo
 
 * `directory` The path to the directory to search through.
 * `pattern` The pattern specifying which files to find.  Can be a glob (for example, `*.txt` to find all text files) or a regexp, as specified by the type parameter.
-* `type` Optional.  The type of pattern to use when doing the match.  Can be `'glob'` (default), `'regexp'`, or `'regexpi'` (case-insensitive regular expression).
+* `type` (Optional, default `'glob'`) The type of pattern to use when doing the match.  Can be `'glob'`, `'regexp'`, or `'regexpi'` (case-insensitive regular expression).
 * `returns` An Nx1 cell array of strings specifying the paths to each file, where N is the number of files found.
 
 Example:
