@@ -131,7 +131,7 @@ Note that the spacing may need to be adjusted to make room for labels, titles, e
 * `subplotSpace` The amount of space (in normalized units) to place around each subplot.  The format 
   is [left, bottom, right, top].  Defaults to [0.05, 0.05, 0.00, 0.00].  If an empty value like [] is 
   passed in, the default values will be used.
-% `plotSpace` The amount of space (in normalized units) to place around the outside of the figure.  
+* `plotSpace` The amount of space (in normalized units) to place around the outside of the figure.  
   The format is [left, bottom, right, top].  Defaults to [0, 0, 0.05, 0.05].  If an empty value like 
   [] is passed in, the default values will be used.
 
