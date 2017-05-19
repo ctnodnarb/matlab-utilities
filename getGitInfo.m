@@ -1,5 +1,5 @@
 function [commitHash, commitMsg, gitStatus] = getGitInfo()
-% [commitHash, commitMsg] = getGitInfo()
+% [commitHash, commitMsg, gitStatus] = getGitInfo()
 %
 % For the HEAD commit in the current Git repository, this function returns
 % the hash, the first line of the commit message, and the string generated

@@ -38,7 +38,7 @@ clearAll;
 
 ## getGitInfo.m
 
-`[commitHash, commitMsg] = getGitInfo()`
+`[commitHash, commitMsg, gitStatus] = getGitInfo()`
 
 Returns the commit hash, first line of the commit message, and git status string for the HEAD commit of the current Git repository.
 
