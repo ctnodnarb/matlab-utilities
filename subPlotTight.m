@@ -28,8 +28,8 @@ function h = subPlotTight(m, n, p, subplotSpace, plotSpace)
 %		passed in, the default values will be used.
 %	plotSpace -- The amount of space (in normalized units) to place around
 %		the outside of the figure.  The format is [left, bottom, right,
-%		top].  Defaults to [0, 0, 0.05, 0.05].  If an empty value like [] 
-%		is passed in, the default values will be used.
+%		top].  Defaults to [0.00, 0.00, 0.05, 0.05].  If an empty value 
+%		like [] is passed in, the default values will be used.
 	
 	subplotM = m - floor((p-1)/n);
 	subplotN = mod((p-1), n) + 1;

@@ -52,13 +52,8 @@ Exports the current (or specified) figure to a pdf file as a rasterized image.  
 * `fileName` The name / path of the file to export the figure to (it should end in .pdf).
 * `figureSize` The size of the figure, formatted as `[width, height]`.
 * `units` The units of the figure size, e.g. `'inches'` or `'in'`.  Any unit that Matlab recognizes will work.
-* `dpi` (Optional, default 300)  The resolution of the output in dots per inch.  The default value
-  will also be used if `[]` or `0` are passed in.
-* `extraSpace` (Optional, default `[0,0,0,0]`)  The amount of extra space (in normalized units) to 
-  include on the left, bottom, right, and top of the image.  This can be used to fix the output if 
-  something is getting cut off on one of the edges of the image.  For example, passing 
-  `[.1, .1, .1, .1]` would include 10% extra space on all sides of the plot.  If `[]` is passed in, 
-  the default value will be used.
+* `dpi` (Optional, default 300)  The resolution of the output in dots per inch.  The default value will also be used if `[]` or `0` are passed in.
+* `extraSpace` (Optional, default `[0,0,0,0]`)  The amount of extra space (in normalized units) to include on the left, bottom, right, and top of the image.  This can be used to fix the output if something is getting cut off on one of the edges of the image.  For example, passing `[.1, .1, .1, .1]` would include 10% extra space on all sides of the plot.  If `[]` is passed in, the default value will be used.
 * `figHandle` (Optional, defaults to the current figure).  The handle of the figure to export.  
 
 Example: 
@@ -120,20 +115,40 @@ printVectorPdf('example.pdf', [4,3], 'in');
 
 `h = subPlotTight(m, n, p, subplotSpace, plotSpace)`
 
-This function is similar to Matlab's subplot() function, but allows you to specify the spacing around each subplot and around the figure as a whole.  It creates an axes object at the specified location (index into the grid of subplots) and returns its handle.
+`h = subPlotTight(m, n, p, space)` This is a shortcut for `subPlotTight(m, n, p, [space, space, 0, 0], [0, 0, space, space])`, which creates even spacing between all the subplots and all the edges of the figure.  Note that `space` must be a scalar.  If a value is still passed for `plotSpace`, it will be used.
 
-Note that the spacing may need to be adjusted to make room for labels, titles, etc, depending on the size of the figure and number of subplots.
+This function is similar to Matlab's `subplot()` function, but allows you
+to specify the spacing around each subplot and around the figure as a
+whole.  It creates an axes object at the specified location and returns
+its handle.
 
+Note that the spacing may need to be adjusted to make room for labels,
+titles, etc, depending on the size of the figure and number of subplots.
+
+Parameters:
 * `m` The number of rows of subplots.
 * `n` The number of columns of subplots.
-* `p` The index of the plot to create, starting with the top left subplot at index 1 and numbering 
-  them as you move to the right, and then down to the next row.
-* `subplotSpace` The amount of space (in normalized units) to place around each subplot.  The format 
-  is [left, bottom, right, top].  Defaults to [0.05, 0.05, 0.00, 0.00].  If an empty value like [] is 
-  passed in, the default values will be used.
-* `plotSpace` The amount of space (in normalized units) to place around the outside of the figure.  
-  The format is [left, bottom, right, top].  Defaults to [0, 0, 0.05, 0.05].  If an empty value like 
-  [] is passed in, the default values will be used.
+* `p` The index of the plot to create, starting with the top left subplot at index 1 and numbering them as you move to the right, and then down to the next row.
+* `subplotSpace` The amount of space (in normalized units) to place around each subplot.  The format is `[left, bottom, right, top]`.  Defaults to `[0.05, 0.05, 0.00, 0.00]`.  If an empty value like `[]` is passed in, the default values will be used.
+* `plotSpace` The amount of space (in normalized units) to place around the outside of the figure.  The format is `[left, bottom, right, top]`.  Defaults to `[0.00, 0.00, 0.05, 0.05]`.  If an empty value like `[]` is passed in, the default values will be used.
+
+Example:
+
+```matlab
+x = 1:100;
+nRows = 3;
+nCols = 4;
+figure();
+for i = 1:nRows*nCols
+	subPlotTight(nRows, nCols, i, 0.04);
+	plot(x,x);
+end
+figure();
+for i = 1:nRows*nCols
+	subPlotTight(nRows, nCols, i, [0.01, 0.01, 0.01, 0.01], [0.1, 0.1, 0.1, 0.1]);
+	plot(x,x);
+end
+```
 
 
 ## useLatex.m
@@ -144,12 +159,9 @@ Sets defaults in `groot` (Matlab's root graphical object) so that all text, tick
 objects will use the LaTeX interpreter.  If a font size and/or font name are specified, defaults are
 set for those as well.
 
-* `fontSize` (Optional) If specified, sets the default font size for axes, text, and legend objects.
-  To remove a previously set value, set this to `'remove'`.
-* `fontName` (Optional) If specified, sets the default font name for axes, text, and legend objects.
-  To remove a previously set value, set this to `'remove'`.
-* `useLatex` (Optional, default `True`) If true, sets the default interpreter for axes, ticklabel, and
-  legend objects to `'latex'`.  If false, removes those settings.
+* `fontSize` (Optional) If specified, sets the default font size for axes, text, and legend objects.  To remove a previously set value, set this to `'remove'`.
+* `fontName` (Optional) If specified, sets the default font name for axes, text, and legend objects.  To remove a previously set value, set this to `'remove'`.
+* `useLatex` (Optional, default `True`) If true, sets the default interpreter for axes, ticklabel, and legend objects to `'latex'`.  If false, removes those settings.
 
 
 ## walkDirectory.m
