@@ -36,6 +36,13 @@ clearAll;
 ```
 
 
+## getGitInfo.m
+
+`[commitHash, commitMsg] = getGitInfo()`
+
+Returns the commit hash, first line of the commit message, and git status string for the HEAD commit of the current Git repository.
+
+
 ## printRasterPdf.m
 
 `printRasterPdf(fileName, figureSize, units, dpi, extraSpace, figHandle)`
@@ -107,6 +114,26 @@ imagesc(rand(10));
 % Export to a rasterized pdf file
 printVectorPdf('example.pdf', [4,3], 'in');
 ```
+
+
+## subPlotTight.m
+
+`h = subPlotTight(m, n, p, subplotSpace, plotSpace)`
+
+This function is similar to Matlab's subplot() function, but allows you to specify the spacing around each subplot and around the figure as a whole.  It creates an axes object at the specified location (index into the grid of subplots) and returns its handle.
+
+Note that the spacing may need to be adjusted to make room for labels, titles, etc, depending on the size of the figure and number of subplots.
+
+* `m` The number of rows of subplots.
+* `n` The number of columns of subplots.
+* `p` The index of the plot to create, starting with the top left subplot at index 1 and numbering 
+  them as you move to the right, and then down to the next row.
+* `subplotSpace` The amount of space (in normalized units) to place around each subplot.  The format 
+  is [left, bottom, right, top].  Defaults to [0.05, 0.05, 0.00, 0.00].  If an empty value like [] is 
+  passed in, the default values will be used.
+% `plotSpace` The amount of space (in normalized units) to place around the outside of the figure.  
+  The format is [left, bottom, right, top].  Defaults to [0, 0, 0.05, 0.05].  If an empty value like 
+  [] is passed in, the default values will be used.
 
 
 ## useLatex.m

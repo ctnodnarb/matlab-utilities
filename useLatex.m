@@ -14,7 +14,7 @@ function useLatex(fontSize, fontName, useLatex)
 %		interpreter for figures (text objects, axes tick label objects, and
 %		legend objects) to 'latex'.  If false, removes those settings.
 
-if ~exist('useLatex', 'var') && ~isempty(useLatex)
+if ~exist('useLatex', 'var') || ~isempty(useLatex)
 	useLatex = true;
 end
 
