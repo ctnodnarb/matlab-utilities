@@ -19,7 +19,7 @@ function color_map = buildColormap(markerPositions, markerColors)
 % And to apply it:
 %   colormap(greedBlackRedCmap);
 % And to set the limits:
-%   caxis([minVal, maxVal]);
+%	caxis([minVal, maxVal]);
 
 if length(markerPositions) ~= size(markerColors, 1)
 	error('the length of markerPositions should be equal to the number of rows in markerColors');

@@ -1,5 +1,5 @@
 function entries = walkDirectory(directory, pattern, type)
-% entries = walkDirectory(directory, pattern)
+% entries = walkDirectory(directory, pattern, type)
 %
 % Walks through the folder structure of a directory and returns the
 % paths to all the files that match the given pattern.  The return

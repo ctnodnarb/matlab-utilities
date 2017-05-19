@@ -43,6 +43,21 @@ clearAll;
 Returns the commit hash, first line of the commit message, and git status string for the HEAD commit of the current Git repository.
 
 
+## makeFolderPath.m
+
+`makeFolderPath(folderPath)`
+
+Creates the folder(s) specified by folderPath if they don't already exist.
+
+Example:
+
+```matlab
+% Create the folders a\b\c\d (if they don't already exist).
+% The type of slash used to separate folder names doesn't matter.
+makeFolderPath('a\b/c\d/');
+```
+
+
 ## printRasterPdf.m
 
 `printRasterPdf(fileName, figureSize, units, dpi, extraSpace, figHandle)`
