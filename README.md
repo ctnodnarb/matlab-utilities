@@ -42,6 +42,10 @@ clearAll;
 
 Returns the commit hash, first line of the commit message, and git status string for the HEAD commit of the current Git repository.
 
+`[commitHash, commitMsg, gitStatus, diffs] = getGitInfo(true)`
+
+Same as above, but additionally returns a cell array containing the git diff for each modified file.
+
 
 ## makeFolderPath.m
 
