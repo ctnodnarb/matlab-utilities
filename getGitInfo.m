@@ -31,10 +31,14 @@ function [commitHash, commitMsg, gitStatus, varargout] = getGitInfo()
 		rootFolder = strtrim(rootFolder);
 		
 		[~, outputString] = system('git diff --name-only');
-		modifiedFiles = strsplit(strtrim(outputString));
+		if isempty(outputString)
+			modifiedFiles = {};
+		else
+			modifiedFiles = strsplit(strtrim(outputString));
+		end
 		
 		nModifiedFiles = numel(modifiedFiles);
-		diffs = cell(nModifiedFiles, 2);
+		diffs = cell(nModifiedFiles, 1);
 		for idx = 1 : nModifiedFiles
 			[~, outputString] = system(['git diff ' fullfile(rootFolder,modifiedFiles{idx})]);
 			diffs{idx} = outputString;
