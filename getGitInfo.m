@@ -1,6 +1,6 @@
-function [commitHash, commitMsg, gitStatus, varargout] = getGitInfo(includeDiffs)
+function [commitHash, commitMsg, gitStatus, varargout] = getGitInfo()
 % [commitHash, commitMsg, gitStatus] = getGitInfo()
-% [commitHash, commitMsg, gitStatus, diffs] = getGitInfo(true)
+% [commitHash, commitMsg, gitStatus, diffs] = getGitInfo()
 %
 % For the HEAD commit in the current Git repository, this function returns
 % the hash, the first line of the commit message, and the string generated
@@ -8,9 +8,8 @@ function [commitHash, commitMsg, gitStatus, varargout] = getGitInfo(includeDiffs
 % repository, it returns 'Not a Git repository' for the hash and empty
 % strings for the message and status.
 %
-% If you pass true in for the includeDiffs parameter, then the fourth
-% output argument (diffs) will be a cell array containing the git diff 
-% string for each modified file.
+% If you include a fourth output argument (diffs), then it will be a cell 
+% array containing the git diff string for each modified file.
 	
 	[commandReturnValue, gitInfoString] = system( ...
 		'git rev-list --format=%s --max-count=1 HEAD');
@@ -26,7 +25,7 @@ function [commitHash, commitMsg, gitStatus, varargout] = getGitInfo(includeDiffs
 	commitMsg = gitInfoLines{2};
 	[~, gitStatus] = system('git status');
 	
-	if exist('includeDiffs', 'var') && includeDiffs
+	if nargout > 3
 		
 		[~, rootFolder] = system('git rev-parse --show-toplevel');
 		rootFolder = strtrim(rootFolder);

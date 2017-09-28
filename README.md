@@ -38,11 +38,11 @@ clearAll;
 
 ## getGitInfo.m
 
-`[commitHash, commitMsg, gitStatus] = getGitInfo()`
+`[commitHash, commitMsg, gitStatus] = getGitInfo();`
 
 Returns the commit hash, first line of the commit message, and git status string for the HEAD commit of the current Git repository.
 
-`[commitHash, commitMsg, gitStatus, diffs] = getGitInfo(true)`
+`[commitHash, commitMsg, gitStatus, diffs] = getGitInfo();`
 
 Same as above, but additionally returns a cell array containing the git diff for each modified file.
 
