@@ -14,9 +14,12 @@ function [commitHash, commitMsg, gitStatus, varargout] = getGitInfo()
 	[commandReturnValue, gitInfoString] = system( ...
 		'git rev-list --format=%s --max-count=1 HEAD');
 	if commandReturnValue ~= 0
-		commitHash = 'Not a Git repository';
-		commitMsg = '';
+		commitHash = ['Error calling Git. Return code = ' int2str(commandReturnValue)];
+		commitMsg = gitInfoString;
 		gitStatus = '';
+		if nargout > 3
+			varargout{1} = {};
+		end
 		return;
 	end
 	
